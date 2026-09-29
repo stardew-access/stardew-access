@@ -165,12 +165,14 @@ jobs:
       - name: Generate Changelog
         id: gen-changelog
         if: inputs.generate-changelog
+        env:
+          PR_MESSAGE: ${{ needs.check-mergeable.outputs.pr-message }}
         run: |
           echo "Generating changelog from PR message..."
           cd ./docs/changelogs
           
           # Extract changelog section from PR message
-          echo "${{ needs.check-mergeable.outputs.pr-message }}" > pr_msg.txt
+          printf '%s\n' "$PR_MESSAGE" > pr_msg.txt
           sed -i '/## Changelog/,$!d' ./pr_msg.txt
           
           # Process changelog using Python script
