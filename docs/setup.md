@@ -17,6 +17,7 @@
         - [MacOS](#macos)
     - [Installing Stardew Access](#installing-stardew-access)
         - [Installing Kokoro and Project Fluent](#installing-kokoro-and-project-fluent)
+        - [Installing Content Patcher](#installing-content-patcher)
     - [Updating Stardew Access](#updating-stardew-access)
 - [Other Mods](#other-mods)
 - [Other Pages](#other-pages)
@@ -57,6 +58,7 @@ If you prefer to install SMAPI, Stardew Access, and its dependencies manually, y
 1. [SMAPI](#smapi-setup)
 2. [Kokoro](#installing-kokoro-and-project-fluent)
 3. [Project Fluent](#installing-kokoro-and-project-fluent)
+4. [Content Patcher](#installing-content-patcher)
 
 ### SMAPI setup
 
@@ -192,6 +194,13 @@ Installation of Project Fluent and Kokoro is essentially the same as installing 
 2. Download the v3.0.0 of Kokoro from
    [this Nexus direct link](https://www.nexusmods.com/stardewvalley/mods/15682?tab=files&file_id=82817)
 3. Extract both zip files and move the contents of each into the `Mods` folder in your game's folder.
+
+#### Installing Content Patcher
+
+[Content Patcher](https://www.nexusmods.com/stardewvalley/mods/1915) is now a dependency for Stardew Access, required to load the bundled `stardew-access-content-pack` that provides dynamic machine tracking and fallback custom data assets for accessibility.
+
+1. Download the latest version of Content Patcher from [Nexus Mods](https://www.nexusmods.com/stardewvalley/mods/1915?tab=files) or [GitHub](https://github.com/Pathoschild/StardewMods/releases).
+2. Extract the downloaded zip file and place the `ContentPatcher` folder into the `Mods` folder in your game directory.
 
 ### Updating Stardew Access
 
