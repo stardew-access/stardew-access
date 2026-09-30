@@ -4,16 +4,25 @@ name: Build
 # ACT (for testing workflows locally): https://nektosact.com/
 
 on:
-  # Runs on the latest PR commit
+  # Runs on push to development and feature branches
+  push:
+    branches:
+      - development
+      - 'feature/**'
+
+  # Runs on pull requests targeting development and feature branches
   pull_request:
     types: [opened, reopened, synchronize]
+    branches:
+      - development
+      - 'feature/**'
 
   # Runs when this workflow is manually called
   workflow_dispatch:
 
   # Runs when this workflow is called by another workflow
   workflow_call:
-  
+
 
 jobs:
   build:
@@ -56,9 +65,9 @@ jobs:
 
       # Rename build zips, remove space and `-debug` suffix to the debug build
       - name: Rename build zips
-        if: github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request' || github.event_name == 'workflow_call'
         run: |
-          mkdir './out/'
+          mkdir -p './out/'
           cd './stardew-access/bin/Debug/net6.0/'
           for f in *zip; do fnew=$(echo ${f} | sed 's/\ /-/g' | sed 's/.zip/-debug.zip/'); mv "${f}" "../../../../out/${fnew}"; done
           cd '../../../../'
@@ -68,10 +77,10 @@ jobs:
           # ls './out/'
 
       # Ref: https://github.com/actions/upload-artifact
-      # Will only upload artifacts when manually called
+      # Upload artifacts on pull requests, manual workflow dispatch, and workflow calls
       - name: Upload zips as artifacts
-        if: github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request' || github.event_name == 'workflow_call'
         uses: actions/upload-artifact@v4
         with:
-          name: stardew-access-nightly
+          name: ${{ github.event_name == 'pull_request' && format('stardew-access-pr-{0}', github.event.pull_request.number || github.run_number) || 'stardew-access-nightly' }}
           path: out/*.zip
