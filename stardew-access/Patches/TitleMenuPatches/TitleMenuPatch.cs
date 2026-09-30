@@ -42,6 +42,14 @@ internal class TitleMenuPatch : IPatch
 
             if (TitleMenu.subMenu == null)
             {
+                if (__instance.titleInPosition && __instance.showButtonsTimer <= 0)
+                {
+                    MouseUtils.SimulateMouseClicks(
+                        (x, y) => __instance.receiveLeftClick(x, y),
+                        null
+                    );
+                }
+
                 if (__instance.muteMusicButton.containsPoint(x, y))
                 {
                     translationKey = "menu-title-mute_music_button";
