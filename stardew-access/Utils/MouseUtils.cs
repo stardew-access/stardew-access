@@ -31,6 +31,7 @@ internal static class MouseUtils
                 Log.Debug($"Simulating left mouse click at {mouseX}x {mouseY}y in menu {IClickableMenuPatch.ActiveMenuOrSubMenu}");
 #endif
                 MainClass.ModHelper!.Input.Press(SButton.MouseLeft);
+                leftClickHandler(mouseX, mouseY);
                 return true;
             }
             if (MainClass.Config.LeftClickAlternateKey.JustPressed())
@@ -51,6 +52,7 @@ internal static class MouseUtils
                 Log.Debug($"Simulating right mouse click at {mouseX}x {mouseY}y");
 #endif
                 MainClass.ModHelper!.Input.Press(SButton.MouseRight);
+                rightClickHandler(mouseX, mouseY);
                 return true;
             }
 
