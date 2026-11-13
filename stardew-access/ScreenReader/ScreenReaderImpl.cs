@@ -2,6 +2,7 @@ using CrossSpeak;
 using stardew_access.Translation;
 using stardew_access.Utils;
 using StardewValley.Menus;
+using System.Runtime.InteropServices;
 
 namespace stardew_access.ScreenReader;
 
@@ -65,6 +66,13 @@ public class ScreenReaderImpl : IScreenReader
             Log.Error("None of the supported screen readers is running");
             return;
         }
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                Log.Info($"Setting Mac TTS speech rate to {MainClass.Config.MacSpeechRate}");
+                CrossSpeakManager.Instance.SetRate(MainClass.Config.MacSpeechRate);
+            }
+        
 
         string name = CrossSpeakManager.Instance.DetectScreenReader();
         if (name != null)
